@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 #define simple_assert(message, test)                                           \
   do {                                                                         \
@@ -22,6 +23,9 @@ static int num_tests = 0;
 
 /* shared data that all the tests will use. */
 static int data[DATA_SIZE][DATA_SIZE];
+
+/* Child pid fot termination */
+pid_t pid = 0;
 
 /**
  * Add a test to our list of test functions that we would like to run.
@@ -56,7 +60,57 @@ void setup(void) {
 /**
  * Run all the test in the test suite.
  */
-void run_all_tests() { /* TODO: Add your code here. */
+
+void term_chil() {
+  printf("Test Timed Out\n");
+  kill(pid, SIGKILL);
+}
+
+void run_all_tests() {
+  int tests_to_run = 0;
+  pid_t zid = fork();
+  if(zid == 0){
+    pid_t t_list[num_tests];
+    // Pipe goes here
+    setup();
+    for(int i = 0; i < num_tests; i++) {
+      signal(SIGALRM, term_chil);
+      pid = fork();
+      if(pid == 0){
+        alarm(3);
+        char *result = test_funcs[i]();
+        if (result == TEST_PASSED){
+          // close(pipeResult[1]);
+          exit(0);
+        } else {
+          // write(pipeResult[1], tresult, strlen(tresult));
+	        // close(pipeResult[1]);
+          exit(1);
+        }
+      } else {
+        t_list[i] = pid;
+      }
+    }
+    for(int i = 0; i < num_tests; i++) {
+      int status;
+
+      waitpid(t_list[i], &status, 0);
+
+      if(WIFEXITED(status)) {
+        int ex = WEXITSTATUS(status);
+        if(ex == 0){
+          printf("Test Passed\n");
+        } else {
+          printf("Test Failed\n");
+        }
+      } else {
+        printf("Test Crashed\n");
+      }
+    }
+    exit(0); 
+  } else {
+    wait(zid);
+  } 
 }
 
 char *test1() {
@@ -141,7 +195,7 @@ int main(int argc, char **argv) {
   add_test(test1);
   add_test(test2);
   add_test(test3);
-  /* add_test(test4); */
-  /* add_test(test5); */
+  add_test(test4);
+  // add_test(test5);
   run_all_tests();
 }
