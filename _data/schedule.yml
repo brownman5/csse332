@@ -82,6 +82,80 @@
     - No class, Exam 1 Day
   materials:
 
+13:
+  reading:
+  topics:
+    - Exam 1 Walkthrough
+  materials:
+
+14:
+  reading:
+  topics:
+    - No class, enjoy the break!
+  materials:
+
+15:
+  reading:
+    - <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/vm-paging.pdf"> Chapter 8 of OSTEP </a>
+  topics:
+    - <a href="{{ site.baseurl }}/notes/session15"> Paging </a>
+  materials:
+
+16:
+  reading:
+    - <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/vm-smalltables.pdf"> Chapter 12 of OSTEP </a>
+  topics:
+    - <a href="{{ site.baseurl }}/notes/session16"> Multi-level Page Tables </a>
+  materials:
+
+17:
+  reading:
+  topics:
+    - <a href="{{ site.baseurl }}/notes/session17"> Paging Activity </a>
+  materials:
+
+18:
+  reading:
+  topics:
+    - '<a href="{{ site.baseurl }}/labs/lab05"> Lab: Virtual Memory II </a>'
+  materials:
+
+19:
+  reading:
+  topics:
+    - '<a href="{{ site.baseurl }}/notes/session18"> Threads: Lightweight Processes </a>'
+  materials:
+
+20:
+  reading:
+  topics:
+    - '<a href="{{ site.baseurl }}/notes/session19"> Concurrency: Mutex & Condition Variables </a>'
+  materials:
+
+21:
+  reading:
+  topics:
+    - '<a href="{{ site.baseurl }}/notes/session20"> Concurrency: Producer-Consumer </a>'
+  materials:
+
+22:
+  reading:
+  topics:
+    - '<a href="{{ site.baseurl }}/notes/session21"> Concurrency: Readers-Writers </a>'
+  materials:
+
+23:
+  reading:
+  topics:
+    - '<a href="{{ site.baseurl }}/notes/session22"> Concurrency: Deadlocks </a>'
+  materials:
+
+24:
+  reading:
+  topics:
+    - '<a href="{{ site.baseurl }}/notes/session23"> Concurrency: RCU </a>'
+  materials:
+
 # 10:
 #   reading:
 #   topics:
